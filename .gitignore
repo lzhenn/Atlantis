@@ -1,0 +1,7 @@
+*.pyc
+*.log
+build
+*egg-info
+sandbox
+test_case/fig
+test_case/output
