@@ -41,7 +41,11 @@ class Driver:
         # iterative solver
         utils.write_log(
             print_prefix+'Start Atlantis kernel.iterative_solver...')
-        inun_iter=kernel.iterative_solver(self.ter_ds)
+        # inun_iter=kernel.iterative_solver(self.ter_ds)
+        inun_iter, inun_iter_num=kernel.constant_solver(self.ter_ds)
+        utils.write_log(
+            print_prefix+'total inundated grids by iterative_sover:%d' % inun_iter_num)
+
 
         # elapsed time info        
         endtime=time.time()
