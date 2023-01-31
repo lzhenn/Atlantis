@@ -20,9 +20,16 @@ def read_ds(fn):
         utils.throw_error(
             print_prefix+'''cannot find file %s,
             check output and wrfout_wildcard in config file'''%fn)
-
     return xr.open_dataset(fn)
 
+def unify_ter_ds(ter_ds):
+    '''
+    unify terrain dataset
+    '''
+    # For Bojun: mask
+    #ter_ds['h']=
+    #ter_ds['mask_rho']=
+    return ter_ds
 
 # ---Unit test---
 if __name__ == '__main__':

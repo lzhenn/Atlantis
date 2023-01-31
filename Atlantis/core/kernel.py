@@ -8,7 +8,7 @@ import numpy as np
 
 
 # ---Classes and Functions---
-def constant_solver(ter_ds, lvl=10):
+def constant_solver(orig_terrain, mask, lvl=10):
     '''
     Constant solver using numpy.where
     test water level 10m
@@ -18,11 +18,7 @@ def constant_solver(ter_ds, lvl=10):
     0              ----      original water body
     -1             ----      dry grid
     '''
-    
-    # prepare data
-    orig_terrain=ter_ds['h'].values
-    mask=ter_ds['mask_rho'].values # 0 for water body, 1 for dry grid
-    
+   
     # calculate inundation
     inun=np.where(
         np.bitwise_and(orig_terrain<lvl, mask==1), lvl-orig_terrain, -1)
@@ -32,7 +28,7 @@ def constant_solver(ter_ds, lvl=10):
     # return
     return inun, inun_count
 
-def iterative_solver(ter_ds, lvl=10):
+def iterative_solver(orig_terrain, mask, lvl=10):
     '''
     Iterative solver
     test water level 10m
@@ -40,8 +36,6 @@ def iterative_solver(ter_ds, lvl=10):
     # !!! For Bojun, please refer constant_solver for data preparation
 
     # prepare data
-    orig_terrain=ter_ds['h'].values
-    mask=ter_ds['mask_rho'].values # 0 for water body, 1 for dry grid
     padding=np.zeros(np.array(mask.shape)+np.array([2, 2]))
     padding[1:-1, 1:-1]=mask
     mask_3d=np.zeros((9, mask.shape[0], mask.shape[1]))

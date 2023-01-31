@@ -8,7 +8,8 @@ using block-structured adaptive mesh.
 This is the main script to drive the model
 
 History:
-Jan 17, 2023 --- Kick off! 
+Jan 17, 2023 --- Kick off!
+Jan 31, 2023 --- Add dtm and water level input 
 
 Zhenning LI
 '''
