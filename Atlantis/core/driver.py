@@ -34,8 +34,8 @@ class Driver:
 
         # water level - terrain height preparation
         # For Bojun
-        # self.tot_wl=math_func.interpolator(
-        #   self.tot_wl, self.orig_terrain)
+        self.tot_wl=math_func.interpolator(
+          self.wl_ds.isel(ocean_time=0), ter_ds)
     
     def drive(self):
         '''

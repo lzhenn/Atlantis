@@ -2,6 +2,7 @@
 """specific module for IO"""
 # ---imports---
 import os
+import numpy as np
 import xarray as xr
 from . import utils
 
@@ -27,8 +28,10 @@ def unify_ter_ds(ter_ds):
     unify terrain dataset
     '''
     # For Bojun: mask
-    #ter_ds['h']=
-    #ter_ds['mask_rho']=
+    ter_ds['h']=xr.where((
+        np.equal(ter_ds['mask_rho'], 1))
+        &(np.less_equal(ter_ds['h'], 0)), 1, ter_ds['h']) 
+    # ter_ds['mask_rho']=
     return ter_ds
 
 # ---Unit test---
