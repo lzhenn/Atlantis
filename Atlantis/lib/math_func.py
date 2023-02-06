@@ -37,7 +37,7 @@ def interpolator(wl_ds_0, ter_ds):
     tot_wl=wl_ds_0['hsig']+wl_ds_0['zeta']
     tot_wl=tot_wl.interpolate_na(dim='eta_rho').interpolate_na(dim='xi_rho')
     
-    tot_wl_region=tot_wl.values[:, region_mask].reshape(shape_0, shape_1)
+    tot_wl_region=tot_wl.values[region_mask].reshape(shape_0, shape_1)
 
     # interpolator
     f_tot_wl_interp=interpolate.interp2d(
