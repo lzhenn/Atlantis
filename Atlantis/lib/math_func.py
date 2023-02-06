@@ -18,17 +18,17 @@ def interpolator(wl_ds_0, ter_ds):
     # region_select
     lon_wl=wl_ds_0.lon_rho
     lat_wl=wl_ds_0.lat_rho
-    lon_ter=ter_ds.lon_rho
-    lat_ter=ter_ds.lat_rho
+    lon_ter=ter_ds.lon_rho.values
+    lat_ter=ter_ds.lat_rho.values
 
     region_mask=(
         (lon_wl>=lon_ter.min())
         &(lon_wl<=lon_ter.max())
         &(lat_wl>=lat_ter.min())
-        &(lat_wl>=lat_ter.max()))
+        &(lat_wl<=lat_ter.max()))
     
-    shape_0=region_mask.values.sum(axis=1).max()
-    shape_1=region_mask.values.sum(axis=0).max()
+    shape_0=region_mask.values.sum(axis=0).max()
+    shape_1=region_mask.values.sum(axis=1).max()
 
     lon_region=lon_wl.values[region_mask].reshape(shape_0, shape_1)
     lat_region=lat_wl.values[region_mask].reshape(shape_0, shape_1)
@@ -36,7 +36,7 @@ def interpolator(wl_ds_0, ter_ds):
     # interpolate_na
     tot_wl=wl_ds_0['hsig']+wl_ds_0['zeta']
     tot_wl=tot_wl.interpolate_na(dim='eta_rho').interpolate_na(dim='xi_rho')
-    
+        
     tot_wl_region=tot_wl.values[region_mask].reshape(shape_0, shape_1)
 
     # interpolator
