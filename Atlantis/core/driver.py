@@ -60,7 +60,7 @@ class Driver:
         utils.write_log(
             print_prefix+'Start Atlantis kernel.iterative_solver...')
         inun_iter, inun_iter_num=kernel.iterative_solver(
-            self.orig_terrain, self.mask, lvl=self.tot_wl)
+            self.orig_terrain, self.mask, lvl=10)
         utils.write_log(
             print_prefix+'total inundated grids by iterative_sover:%d' % inun_iter_num)
 
@@ -94,4 +94,4 @@ class Driver:
 
             plt.show()
     
-        draw_compare(inun_const, inun_num, inun_iter, inun_iter_num)
+        # draw_compare(inun_const, inun_num, inun_iter, inun_iter_num)
