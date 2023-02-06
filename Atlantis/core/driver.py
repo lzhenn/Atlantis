@@ -31,7 +31,8 @@ class Driver:
         self.mask=ter_ds['mask_rho'].values 
     
         # water level handlers
-        self.wl_ds=io.read_ds(cfg['INPUT']['waterlv_file'])
+        wl_ds=io.read_ds(cfg['INPUT']['waterlv_file'])
+        self.wl_ds=io.unify_wl_ds(wl_ds)
         self.tot_wl=self.wl_ds['hsig'].values+self.wl_ds['zeta'].values
 
         # water level - terrain height preparation

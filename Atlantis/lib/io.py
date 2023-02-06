@@ -28,11 +28,27 @@ def unify_ter_ds(ter_ds):
     unify terrain dataset
     '''
     # For Bojun: mask
+    ter_ds_namedict=dict(
+        eta_rho='eta_rho', xi_rho='xi_rho', 
+        mask_rho='mask_rho', h='h',
+        lat_rho='lat_rho', lon_rho='lon_rho')
+    ter_ds=ter_ds.rename(ter_ds_namedict)
     ter_ds['h']=xr.where((
         np.equal(ter_ds['mask_rho'], 1))
         &(np.less_equal(ter_ds['h'], 0)), 1, ter_ds['h']) 
-    # ter_ds['mask_rho']=
     return ter_ds
+
+def unify_wl_ds(wl_ds):
+    '''
+    unify wavelevel dataset
+    '''
+    # For Bojun: mask
+    wl_ds_namedict=dict(
+        eta_rho='eta_rho', xi_rho='xi_rho', ocean_time='ocean_time', 
+        lon_rho='lon_rho', lat_rho='lat_rho', 
+        hsig='hsig', zeta='zeta')
+    wl_ds=wl_ds.rename(wl_ds_namedict)
+    return wl_ds
 
 # ---Unit test---
 if __name__ == '__main__':
